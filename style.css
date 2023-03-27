@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+
+header {
+    display: flex;
+    background-color: coral;
+    justify-content: center;
+}
+
+header button {
+    margin-top: 10px;
+    margin-right: 10px;
+    max-height: 50px;
+    padding: 5px;
+    margin-left: auto;
+}
+
+h1{
+      color: aqua;
+      margin-left: 10px;
+}
+
+#login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
