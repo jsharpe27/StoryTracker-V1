@@ -10,6 +10,7 @@ const cardsEl = document.getElementById('cards')
 
 const addStoryBtn = document.getElementById('add-story')
 const addStoryModal = document.getElementById('add-Story-Modal')
+//const addStoryCloseModalBtn = document.getElementById('close-add-Story-Modal')
 const newTitleField = document.getElementById('new-title')
 const newWordCountField = document.getElementById('new-word-count')
 const newSubCountField = document.getElementById('new-sub-count')
@@ -29,6 +30,10 @@ loginModalClose.addEventListener('click', function(){
 addStoryBtn.addEventListener('click', function(){
     addStoryModal.classList.remove('hidden')
 })
+
+/* addStoryCloseModalBtn.addEventListener('click', function(){
+    addStoryModal.classList.add('hidden')
+}) */
 
 
 /* add new story listener and function */

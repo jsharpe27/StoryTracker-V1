@@ -1,5 +1,9 @@
 body {
     margin: 0;
+    background: #544a7d;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffd452, #544a7d);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffd452, #544a7d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 button:hover {
@@ -9,12 +13,11 @@ button:hover {
 /* header styling */
 header {
     display: flex;
-    background-color: coral;
     justify-content: center;
 }
 
 header h1{
-    color: aqua;
+    color: black;
     margin-left: 10px;
 }
 
@@ -48,9 +51,19 @@ header button {
 }
 
 .add-story-container button {
-    background-color: blueviolet;
+    background-color: #99627A;
     color: whitesmoke;
     font-size: 26px;
+    border-style: none;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    transition: color .3s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+.add-story-container button:hover {
+    box-shadow: inset 300px 0 0 0 #54b3d6;
+  color: white;
 }
 
 #add-Story-Modal {
@@ -68,14 +81,16 @@ header button {
 .card-container {
     margin-top: 100px;
     display: flex;
-    
     gap: 50px;
     flex-wrap: wrap;
     border: solid;
+    
 }
 
 .story-card{
     border: solid yellow 2px;
+    background-color: whitesmoke;
+    border-radius: 10px;
 }
 
 
