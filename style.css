@@ -2,13 +2,23 @@ body {
     margin: 0;
 }
 
+button:hover {
+    cursor: pointer;
+}
 
+/* header styling */
 header {
     display: flex;
     background-color: coral;
     justify-content: center;
 }
 
+header h1{
+    color: aqua;
+    margin-left: 10px;
+}
+
+/* login-button */
 header button {
     margin-top: 10px;
     margin-right: 10px;
@@ -17,17 +27,68 @@ header button {
     margin-left: auto;
 }
 
-h1{
-      color: aqua;
-      margin-left: 10px;
+
+/* login-modal */
+#login-modal {
+    background-color: black;
+    position: absolute;
+   top: 50%;
+   left: 50%;
+    margin: auto;
+    color: whitesmoke;
 }
 
-#login-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
+
+/* adding new story */
+.add-story-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.add-story-container button {
+    background-color: blueviolet;
+    color: whitesmoke;
+    font-size: 26px;
+}
+
+#add-Story-Modal {
+    background-color: black;
+    position: absolute;
+   top: 50%;
+   left: 50%;
     margin: auto;
+    color: whitesmoke;
+}
+
+
+/* main story card content section */
+
+.card-container {
+    margin-top: 100px;
+    display: flex;
+    
+    gap: 50px;
+    flex-wrap: wrap;
+    border: solid;
+}
+
+.story-card{
+    border: solid yellow 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* utility */
+.hidden {
+    display: none;
 }

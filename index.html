@@ -10,26 +10,37 @@
 <body>
 
     <header>
-        <h1>Story Tracker .9</h1>
+        <h1>Story Tracker v1</h1>
         <button id="login-btn">Login here!</button>
     </header>
 
 
+    <div class="add-story-container">
+        <button id="add-story">Add a new story</button>
+    </div>
+
+
+    <main>
+
+        <div class="card-container" id="cards">
+
+
+
+        </div>
+
+
+
+
+    </main>
 
 
 
 
 
 
-
-
-
-
-
-
-
-    <div id="login-modal">
+    <div id="login-modal" class="hidden">
         <h4>login!</h4>
+        <button id="close">X</button>
         <form>
 
             <input type="text" placeholder="Username">
@@ -39,7 +50,25 @@
 
     </div>
 
-    <script src="index.js"></script>
+
+
+    <div id="add-Story-Modal" class="hidden">
+
+        <h4>Add a new story:</h4>
+        <input id="new-title" type="text" placeholder="title">
+        <input id="new-word-count" type="number" placeholder="word count">
+        <input id="new-sub-count" type="number" placeholder="submission count">
+        <button id="add-new-story">Add story</button>
+
+    </div>
+
+
+
+
+
+
+
+    <script src="index.js" type="module"></script>
 
 </body>
 </html>
