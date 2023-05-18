@@ -10,7 +10,7 @@ const cardsEl = document.getElementById('cards')
 
 const addStoryBtn = document.getElementById('add-story')
 const addStoryModal = document.getElementById('add-Story-Modal')
-//const addStoryCloseModalBtn = document.getElementById('close-add-Story-Modal')
+const addStoryCloseModalBtn = document.getElementById('close-add-Story-Modal')
 const newTitleField = document.getElementById('new-title')
 const newWordCountField = document.getElementById('new-word-count')
 const newSubCountField = document.getElementById('new-sub-count')
@@ -31,53 +31,36 @@ addStoryBtn.addEventListener('click', function(){
     addStoryModal.classList.remove('hidden')
 })
 
-/* addStoryCloseModalBtn.addEventListener('click', function(){
-    addStoryModal.classList.add('hidden')
-}) */
 
 
 /* add new story listener and function */
 
 addNewStoryBtn.addEventListener('click', function addNewStory(){
 
-    if (newTitleField.value && newWordCountField.value && newSubCountField.value ){
+    addStoryCloseModalBtn.addEventListener('click', function(){
+        addStoryModal.classList.add('hidden')
+    }) 
+
+   
     
-        let newStoryArray = []
-        newStoryArray.push(storiesArray.length)
-        newStoryArray.push(newTitleField.value)
-        newStoryArray.push(newWordCountField.value)
-        newStoryArray.push(false)
-        newStoryArray.push(newSubCountField.value)
-        
-        let newStoryObj = {...newStoryArray}
-
-        const newkeys = { 0: "id", 1: "title", 2: "wordCount", 3:"isSubmitted", 4:"totalSubCount"};
-        const renamedNewStoryObj = renameKeys(newStoryObj,newkeys)
-        
-
-        storiesArray.push(renamedNewStoryObj)
+        storiesArray.push(
+                {
+                    id: storiesArray.length,
+                    title: newTitleField.value,
+                    wordCount: newWordCountField.value,
+                    isSubmitted: false,
+                    totalSubCount: newSubCountField.value
+                })
         render()  
         addStoryModal.classList.add('hidden')
 
         newTitleField.value = ''
         newWordCountField.value = ''
         newSubCountField.value = ''
-    }
-    else {
-        alert('please fill every field')
-    }
-})
+    })
 
+ 
 
-/* function that renames my keys */
-
-function renameKeys(obj, newKeys) {
-    const keyValues = Object.keys(obj).map(key => {
-      const newKey = newKeys[key] || key;
-      return { [newKey]: obj[key] };
-    });
-    return Object.assign({}, ...keyValues);
-  }
 
 
 
@@ -108,6 +91,7 @@ function getStoriesHtml(){
 
 function render(){
     cardsEl.innerHTML = getStoriesHtml()
+
 }
 
 render()
