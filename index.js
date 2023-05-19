@@ -1,13 +1,17 @@
-import { storiesArray } from './data.js'
+//setting up Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
+const appSettings = {
+    databaseURL: "https://shortstorytracker-v1-default-rtdb.firebaseio.com/"
+}
 
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
+const storiesInDB = ref(database, "stories")
 
-const loginBtnEl = document.getElementById('login-btn')
-const loginModalEl = document.getElementById('login-modal')
-const loginModalClose = document.getElementById('close')
 
 const cardsEl = document.getElementById('cards')
-
 const addStoryBtn = document.getElementById('add-story')
 const addStoryModal = document.getElementById('add-Story-Modal')
 const addStoryCloseModalBtn = document.getElementById('close-add-Story-Modal')
@@ -18,14 +22,6 @@ const addNewStoryBtn = document.getElementById('add-new-story')
 
 
 /* event listeners */
-
-loginBtnEl.addEventListener('click', function(){
-    loginModalEl.classList.remove('hidden')
-})
-
-loginModalClose.addEventListener('click', function(){
-    loginModalEl.classList.add('hidden')
-})
 
 addStoryBtn.addEventListener('click', function(){
     addStoryModal.classList.remove('hidden')
@@ -41,17 +37,16 @@ addNewStoryBtn.addEventListener('click', function addNewStory(){
         addStoryModal.classList.add('hidden')
     }) 
 
-   
     
-        storiesArray.push(
+    
+        push(storiesInDB,
                 {
-                    id: storiesArray.length,
                     title: newTitleField.value,
                     wordCount: newWordCountField.value,
                     isSubmitted: false,
                     totalSubCount: newSubCountField.value
                 })
-        render()  
+
         addStoryModal.classList.add('hidden')
 
         newTitleField.value = ''
@@ -61,37 +56,49 @@ addNewStoryBtn.addEventListener('click', function addNewStory(){
 
  
 
+/* render current stories from firebase */
+
+onValue(storiesInDB, function(snapshot){
+
+        if (snapshot.exists()){
+        let storiesArray = Object.values(snapshot.val())
+
+        storiesArray.forEach(function(storiesArray){
+            addStory(storiesArray)
+            //console.log(snapshot.val())
+        })
+
+        }else {
+            console.log("add a story!")
+        }
+
+        
+})
 
 
 
+/*adding a new story to firebase*/
+function addStory(story){
 
+    let storyId = story[0]
+    let storyCardEl = document.createElement('div')
 
+    storyCardEl.innerHTML = `
+    
+        <h1>${story.title}</h1>
+        <h1>${story.wordCount}</h1>
+        <h1>${story.isSubmitted}</h1>
+        <h1>${story.totalSubCount}</h1>
+        <button id="remove-btn">remove story</button>
+    `
+    cardsEl.prepend(storyCardEl)
+    const removeStoryEl = document.getElementById('remove-btn')
 
-
-/* render current stories from data file */
-
-function getStoriesHtml(){
-    let storiesHtml = ''
-
-    storiesArray.forEach(function(story){
-
-        storiesHtml += `
-        <div class="story-card">
-            <h3>Title: ${story.title}</h3>
-            <h4>Wordcount: ${story.wordCount} words</h4>
-            <p>Submission count: ${story.totalSubCount}</p>
-        </div>
-        `
-
-
+    removeStoryEl.addEventListener('click', function(){
+        
+        let locationInStoriesDB = ref(database, `stories/${storyId}`)
+        console.log(story.val())
+        remove(locationInStoriesDB)
     })
-    return storiesHtml
-}
-
-
-function render(){
-    cardsEl.innerHTML = getStoriesHtml()
 
 }
-
-render()
